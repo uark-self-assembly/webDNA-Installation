@@ -1,0 +1,21 @@
+#!/bin/sh
+#PBS -N oxDNA
+#PBS -q tiny12core
+#PBS -j oe
+#PBS -o gc_mc.$PBS_JOBID
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=03:59:00
+
+cd $PBS_O_WORKDIR
+
+date
+echo "starting sims..."
+
+job_dir=tlf_GC_mc_rcut
+is_nb_sim=True
+
+NP=$(wc -l < $PBS_NODEFILE)
+mpirun -np $NP -machinefile $PBS_NODEFILE ./a.out $job_dir $is_nb_sim
+
+echo "end of sims..."
+date

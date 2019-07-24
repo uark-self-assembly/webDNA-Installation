@@ -1,0 +1,16 @@
+1/26/15
+
+NOTES:
+1. At the moment, will have to jockey path variables within the python scripts and main.cpp depending on the location of the ox_cluster dir.
+
+2. To compile main.cpp on the razor cluster make sure you have loaded the intel compiler & MPI modules. 
+   To load these (assuming gcc is preloaded): 
+        `module unload gcc; 
+         module load intel; 
+         module load openmpi; 
+         module refresh;`
+   You can them run: `mpic++ main.cpp`
+
+
+
+
