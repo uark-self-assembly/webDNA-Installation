@@ -1,0 +1,298 @@
+General Documentation on the .pdb can be found at: http://www.wwpdb.org/docs.html
+
+================================================================================================
+	HET: http://www.wwpdb.org/documentation/format33/sect4.html#HET
+================================================================================================
+
+HET records are used to describe non-standard residues, such as prosthetic groups, inhibitors, 
+solvent molecules, and ions for which coordinates are supplied. Groups are considered HET if they 
+are not part of a biological polymer described in SEQRES and considered to be a molecule bound to 
+the polymer
+Each HET group is assigned a hetID of not more than three (3) alphanumeric characters. The sequence 
+number, chain identifier, insertion code, and number of coordinate records are given for each 
+occurrence of the HET group in the entry. The chemical name of the HET group is given in the 
+HETNAM record and synonyms for the chemical name are given in the HETSYN records.
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+HET     AU  A   1       1                                                       
+HET     AU  A   2       1                                                       
+HETNAM      AU GOLD ION 
+Record Format:
+
+COLUMNS       DATA  TYPE     FIELD         DEFINITION
+---------------------------------------------------------------------------------
+ 1 -  6       Record name   "HET   "
+ 8 - 10       LString(3)    hetID          Het identifier, right-justified.
+13            Character     ChainID        Chain  identifier.
+14 - 17       Integer       seqNum         Sequence  number.
+18            AChar         iCode          Insertion  code.
+21 - 25       Integer       numHetAtoms    Number of HETATM records for the group
+                                           present in the entry.
+31 - 70       String        text           Text describing Het group.
+
+================================================================================================
+	HETNAM: http://www.wwpdb.org/documentation/format33/sect4.html#HETNAM
+================================================================================================
+
+This record gives the chemical name of the compound with the given hetID.
+
+Record Format:
+
+COLUMNS       DATA  TYPE    FIELD           DEFINITION
+----------------------------------------------------------------------------
+ 1 -  6       Record name   "HETNAM"
+ 9 - 10       Continuation  continuation    Allows concatenation of multiple records.
+12 - 14       LString(3)    hetID           Het identifier, right-justified.
+16 - 70       String        text            Chemical name.
+
+================================================================================================
+	LINK: http://www.wwpdb.org/documentation/format33/sect6.html#LINK
+	see also: CONECT: http://www.wwpdb.org/documentation/format33/sect10.html#CONECT
+================================================================================================
+The LINK records specify connectivity between residues that is not implied by the primary structure. 
+Connectivity is expressed in terms of the atom names. They also include the distance associated 
+with the each linkage following the symmetry operations at the end of each record.
+
+Record Format
+
+COLUMNS         DATA TYPE      FIELD           DEFINITION
+------------------------------------------------------------------------------------
+ 1 -  6         Record name    "LINK  "
+13 - 16         Atom           name1           Atom name.
+17              Character      altLoc1         Alternate location indicator.
+18 - 20         Residue name   resName1        Residue  name.
+22              Character      chainID1        Chain identifier.
+23 - 26         Integer        resSeq1         Residue sequence number.
+27              AChar          iCode1          Insertion code.
+43 - 46         Atom           name2           Atom name.
+47              Character      altLoc2         Alternate location indicator.
+48 - 50         Residue name   resName2        Residue name.
+52              Character      chainID2        Chain identifier.
+53 - 56         Integer        resSeq2         Residue sequence number.
+57              AChar          iCode2          Insertion code.
+60 - 65         SymOP          sym1            Symmetry operator atom 1.
+67 - 72         SymOP          sym2            Symmetry operator atom 2.
+74 – 78         Real(5.2)      Length          Link distance
+
+Details
+
+The atoms involved in bonds between HET groups or between a HET group and standard residue 
+are listed. Inter-residue linkages not implied by the primary structure are listed (e.g., 
+reduced peptide bond). Non-standard linkages between residues, e.g., side-chain to side-chain, 
+are listed. Each LINK record specifies one linkage. These records do not specify connectivity 
+within a HET group (see CONECT) or disulfide bridges (see SSBOND).
+
+sym1 and sym2 are right justified and are given as blank when the identity operator 
+(and no cell translation) is to be applied to the atom.
+
+================================================================================================
+	SITE: http://www.wwpdb.org/documentation/format33/sect7.html#SITE
+================================================================================================
+Site records specify residues comprising catalytic, co-factor, anti-codon, regulatory or 
+other essential sites or environments surrounding ligands present in the structure.
+
+Record Format
+
+COLUMNS        DATA  TYPE    FIELD         DEFINITION
+---------------------------------------------------------------------------------
+ 1 -  6        Record name   "SITE  "
+ 8 - 10        Integer       seqNum        Sequence number.
+12 - 14        LString(3)    siteID        Site name.
+16 - 17        Integer       numRes        Number of residues that compose the site.
+19 - 21        Residue name  resName1      Residue name for first residue that 
+                                           creates the site.
+23             Character     chainID1      Chain identifier for first residue of site.
+24 - 27        Integer       seq1          Residue sequence number for first residue
+                                           of the  site.
+28             AChar         iCode1        Insertion code for first residue of the site.
+30 - 32        Residue name  resName2      Residue name for second residue that 
+                                           creates the site.
+34             Character     chainID2      Chain identifier for second residue of
+                                           the  site.
+35 - 38        Integer       seq2          Residue sequence number for second
+                                           residue of the site.
+39             AChar         iCode2        Insertion code for second residue
+                                           of the  site.
+41 - 43        Residue name  resName3      Residue name for third residue that 
+                                           creates  the site.
+45             Character     chainID3      Chain identifier for third residue
+                                           of the site.
+46 - 49        Integer       seq3          Residue sequence number for third
+                                           residue of the site.
+50             AChar         iCode3        Insertion code for third residue
+                                           of the site.
+52 - 54        Residue name  resName4      Residue name for fourth residue that 
+                                           creates  the site.
+56             Character     chainID4      Chain identifier for fourth residue
+                                           of the site.
+57 - 60        Integer       seq4          Residue sequence number for fourth
+                                           residue of the site.
+61             AChar         iCode4        Insertion code for fourth residue
+                                           of the site.
+																					 
+Details
+
+The sequence number (columns 8 - 10) is reset to 1 for each new site.
+SITE identifiers (columns 12 - 14) should be fully explained in remark 800.
+If a site is composed of more than four residues, these may be specified on 
+additional records bearing the same site identifier. SITE records can include HET groups.
+
+================================================================================================
+	HETATM: http://www.wwpdb.org/documentation/format33/sect9.html#HETATM
+================================================================================================
+
+Non-polymer or other “non-standard” chemical coordinates, such as water molecules or atoms 
+presented in HET groups use the HETATM record type. They also present the occupancy and 
+temperature factor for each atom. The ATOM records present the atomic coordinates for 
+standard residues. The element symbol is always present on each HETATM record; charge is optional.
+
+On the Occupancy field: 
+The x,y,z coordinates are followed by a number, which is one in most cases. This is called atom 
+occupancy. Sometimes the side chain of a particular amino acid, but even main chain atoms, may have
+two or more different conformations due to local flexibility. These conformations can be 
+distinguished in the electron density map of the structure. In this case the crystallographer 
+will build both conformations into the electron density and refine a parameter called occupancy, 
+for each conformation. In protein databank files these conformations are called "alternative 
+conformations" and often marked with "ALT". The occupancy numbers for each alternative conformation 
+will be less than 1 (1 corresponds to 100% occupancy), for example it may be 0.5/0.5 (50/50), when 
+both conformations are equally occupied, or 40/60, or some other numbers. Also ligands and metal atoms 
+bound to proteins may often have partial occupancy, for example if the concentration of the ligand or 
+metal, which was co-crystallized with the protein or soaked into the protein crystal, was too low. 
+
+Record Format
+
+COLUMNS       DATA  TYPE     FIELD         DEFINITION
+-----------------------------------------------------------------------
+ 1 - 6        Record name    "HETATM"
+ 7 - 11       Integer        serial        Atom serial number.
+13 - 16       Atom           name          Atom name.
+17            Character      altLoc        Alternate location indicator.
+18 - 20       Residue name   resName       Residue name.
+22            Character      chainID       Chain identifier.
+23 - 26       Integer        resSeq        Residue sequence number.
+27            AChar          iCode         Code for insertion of residues.
+31 - 38       Real(8.3)      x             Orthogonal coordinates for X.
+39 - 46       Real(8.3)      y             Orthogonal coordinates for Y.
+47 - 54       Real(8.3)      z             Orthogonal coordinates for Z.
+55 - 60       Real(6.2)      occupancy     Occupancy.
+61 - 66       Real(6.2)      tempFactor    Temperature factor.
+77 - 78       LString(2)     element       Element symbol; right-justified.
+79 - 80       LString(2)     charge        Charge on the atom.
+
+================================================================================================
+	EXAMPLE SNIPPET OF PDB 
+================================================================================================
+.
+.
+.
+REMARK 800                                                                      
+REMARK 800 SITE                                                                 
+REMARK 800 SITE_IDENTIFIER: AC1                                                 
+REMARK 800 EVIDENCE_CODE: SOFTWARE                                              
+REMARK 800 SITE_DESCRIPTION: BINDING SITE FOR RESIDUE AU A 1                    
+REMARK 800                                                                      
+REMARK 800 SITE_IDENTIFIER: AC2                                                 
+REMARK 800 EVIDENCE_CODE: SOFTWARE                                              
+REMARK 800 SITE_DESCRIPTION: BINDING SITE FOR RESIDUE AU A 2    
+.
+.
+.
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+HET     AU  A   1       1                                                       
+HET     AU  A   2       1                                                       
+HETNAM      AU GOLD ION                                                         
+FORMUL   2   AU    2(AU 1+)                                                     
+FORMUL   4  HOH   *39(H2 O)                                                     
+HELIX    1   1 SER A   27  VAL A   36  1                                  10    
+HELIX    2   2 ASN A   41  ALA A   50  1                                  10    
+HELIX    3   3 ASP A   56  LEU A   70  1                                  15    
+HELIX    4   4 ASP A   80  LEU A   88  1                                   9    
+HELIX    5   5 ASP A   95  LYS A  109  1                                  15    
+HELIX    6   6 ASN A  110  ILE A  114  5                                   5    
+HELIX    7   7 ASP A  116  GLN A  126  1                                  11    
+HELIX    8   8 LEU A  128  MET A  134  1                                   7    
+SHEET    1   A 2 TYR A  73  ASP A  74  0                                        
+SHEET    2   A 2 GLY A  78  VAL A  79 -1  O  GLY A  78   N  ASP A  74           
+SSBOND   1 CYS A   32    CYS A   65                          1555   1555  2.04  
+SSBOND   2 CYS A   61    CYS A  118                          1555   1555  2.04  
+SSBOND   3 CYS A  105    CYS A  127                          1555   1555  2.02  
+LINK         ND1 HIS A  60                AU    AU A   1     1555   1555  2.20  
+LINK         NE2 HIS A  47                AU    AU A   2     1555   1555  2.40  
+SITE     1 AC1  2 PRO A  57  HIS A  60                                          
+SITE     1 AC2  1 HIS A  47  
+.
+.
+.
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+HETATM  875 AU    AU A   1       7.276  31.747  36.941  1.00 24.80          AU  
+HETATM  876 AU    AU A   2      10.162  47.395  40.224  0.56 61.74          AU  
+.
+.
+.
+CONECT  875  257                                                                
+CONECT  876  150  
+.
+.
+.
+================================================================================================
+
+
+
+
+
+================================================================================================
+INFORMATION NOT RELATED TO AU:
+================================================================================================
+ANISOU
+The ANISOU records present the anisotropic temperature factors.
+
+Record Format
+
+COLUMNS       DATA  TYPE    FIELD          DEFINITION
+-----------------------------------------------------------------
+ 1 - 6        Record name   "ANISOU"
+ 7 - 11       Integer       serial         Atom serial number.
+13 - 16       Atom          name           Atom name.
+17            Character     altLoc         Alternate location indicator
+18 - 20       Residue name  resName        Residue name.
+22            Character     chainID        Chain identifier.
+23 - 26       Integer       resSeq         Residue sequence number.
+27            AChar         iCode          Insertion code.
+29 - 35       Integer       u[0][0]        U(1,1)
+36 - 42       Integer       u[1][1]        U(2,2)
+43 - 49       Integer       u[2][2]        U(3,3)
+50 - 56       Integer       u[0][1]        U(1,2)
+57 - 63       Integer       u[0][2]        U(1,3)
+64 - 70       Integer       u[1][2]        U(2,3)
+77 - 78       LString(2)    element        Element symbol, right-justified.
+79 - 80       LString(2)    charge         Charge on the atom.
+Details
+
+Columns 7 - 27 and 73 - 80 are identical to the corresponding ATOM/HETATM record.
+The anisotropic temperature factors (columns 29 - 70) are scaled by a factor of 10**4 
+(Angstroms**2) and are presented as integers. The anisotropic temperature factors are stored 
+in the same coordinate frame as the atomic coordinate records.
+ANISOU values are listed only if they have been provided by the depositor.
+
+
+ATOM
+COLUMNS        DATA  TYPE    FIELD        DEFINITION
+-------------------------------------------------------------------------------------
+ 1 -  6        Record name   "ATOM  "
+ 7 - 11        Integer       serial       Atom  serial number.
+13 - 16        Atom          name         Atom name.
+17             Character     altLoc       Alternate location indicator.
+18 - 20        Residue name  resName      Residue name.
+22             Character     chainID      Chain identifier.
+23 - 26        Integer       resSeq       Residue sequence number.
+27             AChar         iCode        Code for insertion of residues.
+31 - 38        Real(8.3)     x            Orthogonal coordinates for X in Angstroms.
+39 - 46        Real(8.3)     y            Orthogonal coordinates for Y in Angstroms.
+47 - 54        Real(8.3)     z            Orthogonal coordinates for Z in Angstroms.
+55 - 60        Real(6.2)     occupancy    Occupancy.
+61 - 66        Real(6.2)     tempFactor   Temperature  factor.
+77 - 78        LString(2)    element      Element symbol, right-justified.
+79 - 80        LString(2)    charge       Charge  on the atom.
