@@ -1,0 +1,19 @@
+mat-expansion-panel.project-table-item {
+    background: #fff;
+}
+
+mat-expansion-panel-title.project-table-item {
+    width: 150px;
+}
+
+table.action-items {
+    margin: 0px;
+}
+
+.no-projects-style {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+    color: #444444;
+}

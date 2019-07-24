@@ -1,0 +1,7 @@
+<div #scrollableWindow style="overflow: scroll; overflow-y: scroll; overflow-x: hidden; background: black;" [style.height.px]="height" [scrollTop]="scrollableWindow.scrollHeight">
+    <div style="background: black; min-width: 400px;">
+        <span style="color: white; font-family: 'Courier New';" *ngFor="let line of lines">{{line}}
+            <br>
+        </span>
+    </div>
+</div>

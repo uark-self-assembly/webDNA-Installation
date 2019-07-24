@@ -1,0 +1,25 @@
+.login-page {
+    max-width: 800px;
+}
+
+.login-container {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.login-form > * {
+    width: 100%;
+}
+
+.no-account {
+    display: block;
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.no-account:hover {
+    text-decoration: underline;
+}

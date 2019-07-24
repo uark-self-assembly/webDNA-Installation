@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+    Output: {{data.project.name}}
+    <span class="pull-right">
+        <button mat-icon-button tabindex="-1" (click)="onCloseClicked()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+</h2>
+<mat-dialog-content>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>oxDNA Progress</h5>
+                <log-output [logText]="data.oxDNALog" [height]="data.logHeight"></log-output>
+            </div>
+            <div class="col-md-6">
+                <h5>Program Output</h5>
+                <log-output [logText]="data.programLog" [height]="data.logHeight"></log-output>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

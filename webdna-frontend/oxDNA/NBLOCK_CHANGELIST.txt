@@ -1,0 +1,23 @@
+src/Particles/BaseParticle.h:192:    /// TLF CHANGED added following five lines
+src/Particles/.svn/text-base/BaseParticle.h.svn-base:192:    /// TLF CHANGED added following four lines
+src/defs.h:33:#define P_NP 9 // TLF change added line
+src/Interactions/NBLOCKInteraction.cpp:48:	F2_K[1] = CXST_K_OXDNA; // TLF CHANGE added '_OXDNA'
+src/Interactions/NBLOCKInteraction.cpp:121:	F4_THETA_T0[10] = CXST_THETA1_T0_OXDNA; // TLF change added '_OXDNA'
+src/Interactions/NBLOCKInteraction.cpp:273:			F1_EPS[STCK_F1][i][j] = STCK_BASE_EPS_OXDNA + STCK_FACT_EPS_OXDNA * _T; //TLF change
+src/Interactions/NBLOCKInteraction.cpp:277:			F1_EPS[HYDR_F1][i][j] = HYDR_EPS_OXDNA; //TLF change
+src/Interactions/NBLOCKInteraction.cpp:600:	number rbackr0 = rbackmod - FENE_R0_OXDNA; // TLF CHANGE added _OXDNA
+src/Interactions/NBLOCKInteraction.cpp:1589:		number mind = FENE_R0_OXDNA - FENE_DELTA; // TLF CHANGE added _OXDNA
+src/Interactions/NBLOCKInteraction.cpp:1590:		number maxd = FENE_R0_OXDNA + FENE_DELTA; // TLF CHANGE ^
+src/Interactions/NBLOCKInteraction.h:182:    // TLF changed the else branch
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:48:	F2_K[1] = CXST_K_OXDNA; // TLF CHANGE added '_OXDNA'
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:121:	F4_THETA_T0[10] = CXST_THETA1_T0_OXDNA; // TLF change added '_OXDNA'
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:273:			F1_EPS[STCK_F1][i][j] = STCK_BASE_EPS_OXDNA + STCK_FACT_EPS_OXDNA * _T; //TLF change
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:277:			F1_EPS[HYDR_F1][i][j] = HYDR_EPS_OXDNA; //TLF change
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:600:	number rbackr0 = rbackmod - FENE_R0_OXDNA; // TLF CHANGE added _OXDNA
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:1589:		number mind = FENE_R0_OXDNA - FENE_DELTA; // TLF CHANGE added _OXDNA
+src/Interactions/.svn/text-base/NBLOCKInteraction.cpp.svn-base:1590:		number maxd = FENE_R0_OXDNA + FENE_DELTA; // TLF CHANGE ^
+src/Interactions/.svn/text-base/NBLOCKInteraction.h.svn-base:182:    // TLF changed the else branch
+src/Backends/Thermostats/BrownianThermostat.cpp:63:			p->vel = LR_vector<number>(Utils::gaussian<number>(), Utils::gaussian<number>(), Utils::gaussian<number>()) * (_rescale_factor * p->get_scale_factor()); //TLF change added '* p->get_scale_factor()
+src/Backends/Thermostats/BrownianThermostat.cpp:66:			p->L = LR_vector<number>(Utils::gaussian<number>(), Utils::gaussian<number>(), Utils::gaussian<number>()) * (_rescale_factor * p->get_scale_factor()); //TLF change added '* p->get_scale_factor()
+src/.svn/text-base/defs.h.svn-base:33:#define P_NP 9 // TLF change added line
+

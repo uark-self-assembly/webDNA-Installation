@@ -1,0 +1,23 @@
+.auth-background {
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center center;
+    background-image: url('../../../../assets/img/dna-background.png');
+}
+
+.auth-background-tint {
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    background: rgba(33, 150, 243, 0.8);
+}

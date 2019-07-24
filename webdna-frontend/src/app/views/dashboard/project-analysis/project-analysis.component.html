@@ -1,0 +1,123 @@
+<div class="project-analysis-page">
+    <button mat-icon-button class="back-button" color="accent" (click)="backClicked()">
+        <mat-icon class="back-button-icon">arrow_back</mat-icon>
+    </button>
+
+    <div class="row analysis-row">
+        <div class="text-muted analysis-text-title">
+            Analysis Configuration
+            <span style="font-size: 18px;">"{{project.name}}"</span>
+        </div>
+    </div>
+
+    <div class="content content-full-width">
+        <div class="row button-row">
+            <button mat-icon-button color="primary" matTooltip="Save" (click)="saveClicked()">
+                <mat-icon>save</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" class="pull-right" (click)="saveAndRunClicked()">
+                <mat-icon>play_arrow</mat-icon>
+                Save and Run
+            </button>
+        </div>
+
+        <div class="row">
+            <!-- User scripts -->
+            <div class="col-md-6">
+                <mat-card>
+                    <!-- title -->
+                    <mat-card-title>
+                        Your Scripts
+                    </mat-card-title>
+
+                    <mat-card-subtitle>
+                        Drag one or more of your scripts to Pipeline Settings
+                    </mat-card-subtitle>
+
+                    <!-- content -->
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item dnd-draggable *ngFor="let script of scripts" [dragEnabled]="true" [dragData]="{script: script, fromScripts: true}"
+                                (onDragStart)="isDragging = true" (onDragEnd)="isDragging = false" matTooltip="{{script.description}}">
+                                <mat-divider></mat-divider>
+                                {{script.file_name}}
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+
+                    <!-- actions -->
+                    <mat-card-actions>
+                        <button mat-icon-button color="primary" (click)="uploadScriptClicked()" matTooltip="Add a new script">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" (click)="manageScriptsClicked()" matTooltip="Go to Script Management page">
+                            <mat-icon>open_in_new</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+            <!-- Pipeline configuration -->
+            <div class="col-md-6">
+                <mat-card>
+                    <mat-card-title>
+                        Pipeline Settings
+                    </mat-card-title>
+
+                    <mat-card-subtitle>
+                        Drag items to reorder
+                    </mat-card-subtitle>
+
+                    <mat-card-content>
+                        <mat-list dnd-sortable-container class="pipeline-list-container" [sortableData]="pipeline">
+                            <mat-list-item *ngFor="let script of pipeline; let i = index;" class="pipeline-list-item" dnd-sortable [sortableIndex]="i">
+                                <div dnd-sortable-handle class="full-width">
+                                    <span style="margin-right: 20px; font-size: 18px;">
+                                        <strong>{{i+1}}</strong>
+                                    </span>
+                                    {{script.file_name}}
+                                </div>
+                                <button mat-icon-button>
+                                    <mat-icon color="warning" (click)="removeScript(i)">clear</mat-icon>
+                                </button>
+                            </mat-list-item>
+                        </mat-list>
+
+                        <div *ngIf="isDragging" dnd-droppable (onDropSuccess)="scriptDropSuccess($event)">
+                            <div class="drop-location">
+                                (Drop to Add Script)
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+
+                    <mat-card-actions>
+                        <!-- add script action -->
+                        <!-- clear all action  -->
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- Analysis log output -->
+        <div class="row analysis-pipeline-output-container">
+            <div class="col-md-12">
+                <mat-card>
+                    <mat-card-title>
+                        Pipeline Output
+                    </mat-card-title>
+
+                    <mat-card-content>
+                        <log-output [logText]="analysisLogText" [height]="400"></log-output>
+                    </mat-card-content>
+
+                    <mat-card-actions>
+                        <button mat-icon-button color="primary" matTooltip="Download" matTooltipPosition="above" (click)="logDownloadClicked()">
+                            <mat-icon>save_alt</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

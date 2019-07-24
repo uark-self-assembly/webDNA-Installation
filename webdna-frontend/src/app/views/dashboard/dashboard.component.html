@@ -1,0 +1,21 @@
+<div class="main-content" layout="column" flex style="height: 100%; overflow: auto; overflow-x: hidden; margin-bottom: 0px; top: 64px; padding: 30px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div [ngSwitch]="currentPage">
+                    <div *ngSwitchCase="ProjectPage.TABLE">
+                        <project-list [projectClicked]="projectClicked" [currentPage]="currentPage"></project-list>
+                    </div>
+
+                    <div *ngSwitchCase="ProjectPage.SETTINGS">
+                        <project-config [project]="editingProject" [didClickBack]="didClickBackFromConfig" [didClickAnalysis]="didClickAnalysis"></project-config>
+                    </div>
+
+                    <div *ngSwitchCase="ProjectPage.ANALYSIS">
+                        <project-analysis [project]="editingProject" [currentPage]="currentPage" [didClickBack]="didClickBackFromAnalysis"></project-analysis>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div *ngIf="!projectRows || projectRows.length === 0" class="no-projects-style">
+    No projects. Click "+ New" to get started
+</div>
+
+<mat-accordion *ngIf="projectRows && projectRows.length">
+    <mat-expansion-panel class="project-table-item" *ngFor="let row of projectRows" id="acc_{{row.project.id}}" (opened)="groupOpened(row)"
+        (closed)="groupClosed(row)" [expanded]="row.project.id === openedProjectId">
+        <mat-expansion-panel-header class="project-table-item right-aligned-header">
+            <mat-panel-title class="project-table-item">
+                {{row.project.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{row.project.executionTime}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+
+        <div class="table-responsive">
+            <table class="table action-items">
+                <tr>
+                    <button *ngIf="row.project.hasOutput" mat-button color="primary" (click)="restartClicked(row)">
+                        <mat-icon>replay</mat-icon>
+                        Restart
+                    </button>
+
+                    <button *ngIf="!row.project.hasOutput" mat-button color="accent" (click)="startClicked(row)">
+                        <mat-icon>play_arrow</mat-icon>
+                        Start
+                    </button>
+
+                    <button *ngIf="row.project.running" mat-button color="warn" (click)="stopClicked(row)">
+                        <mat-icon>stop</mat-icon>
+                        Stop
+                    </button>
+
+                    <button mat-button disabled="{{!row.project.hasOutput}}" color="primary" (click)="viewOutputClicked(row)">
+                        <mat-icon>vertical_split</mat-icon>
+                        Output
+                    </button>
+
+                    <button *ngIf="!row.project.running" mat-button color="primary" (click)="editClicked(row)">
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </button>
+
+                    <button *ngIf="!row.project.running" mat-button disabled="{{row.downloading}}" color="primary" (click)="downloadClicked(row)">
+                        <mat-icon>get_app</mat-icon>
+                        {{row.downloading ? 'Downloading...' : 'Download'}}
+                    </button>
+
+                    <button *ngIf="!row.project.running && !row.downloading" mat-button color="primary" (click)="duplicateClicked(row.project)">
+                        <mat-icon>file_copy</mat-icon>
+                        Duplicate
+                    </button>
+
+                    <button *ngIf="!row.project.running" mat-button color="warn" (click)="deleteClicked(row.project)">
+                        <mat-icon>delete</mat-icon>
+                        Delete
+                    </button>
+                </tr>
+            </table>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,48 @@
+.register-page {
+    max-width: 800px;
+    color: white;
+}
+
+.big-mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 10px;
+}
+
+.registration-form > * {
+    width: 100%;
+}
+
+.existing-account {
+    display: block;
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.existing-account:hover {
+    text-decoration: underline;
+}
+
+.register-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    text-align: center;
+}
+
+.register-hyperlink {
+    color: #fff;
+    font-weight: bold;
+}
+
+.register-hyperlink:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,207 @@
+<div class="container-fluid register-page" [@pageStagger]="this">
+    <div class="row">
+        <div class="header-text">
+            <h2>Welcome to WebDNA</h2>
+            <h4>An oxDNA Simulation + Analysis Framework</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="media">
+                <div class="media-left">
+                    <mat-icon class="big-mat-icon">play_arrow</mat-icon>
+                </div>
+                <div class="media-body">
+                    <h3>Run DNA Simulations</h3>
+                    Take advantage of the rich feature set of oxDNA with an accessable user interface and minimal programming requirements.
+                </div>
+            </div>
+
+            <div class="media">
+                <div class="media-left">
+                    <div class="align-middle">
+                        <mat-icon class="big-mat-icon">autorenew</mat-icon>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h3>Analysis Pipeline</h3>
+                    Analyze your simulation results with a series of built-in Python scripts, or write your own!
+
+                </div>
+            </div>
+
+            <div class="media">
+                <div class="media-left">
+                    <mat-icon class="big-mat-icon">share</mat-icon>
+                </div>
+                <div class="media-body">
+                    <h3>Visualization</h3>
+                    Observe your results with an easy to use browser-based simulation visualizer.
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-card>
+                <mat-card-title>Register</mat-card-title>
+                <mat-card-subtitle>Create your account now</mat-card-subtitle>
+
+                <mat-card-content class="registration-form">
+                    <form class="registration-form" [formGroup]="registration">
+                        <mat-form-field hideRequiredMarker="true">
+                            <input matInput formControlName="firstName" placeholder="First name" required>
+                        </mat-form-field>
+
+                        <mat-form-field hideRequiredMarker="true">
+                            <input matInput formControlName="lastName" placeholder="Last name" required>
+                        </mat-form-field>
+
+                        <mat-form-field hideRequiredMarker="true">
+                            <input matInput formControlName="username" placeholder="Username" required>
+                        </mat-form-field>
+
+                        <mat-form-field hideRequiredMarker="true">
+                            <input matInput formControlName="email" placeholder="Email" required>
+                        </mat-form-field>
+
+                        <mat-form-field hideRequiredMarker="true">
+                            <input matInput type="password" formControlName="password" placeholder="Password" required>
+                        </mat-form-field>
+
+                        <mat-form-field hideRequiredMarker="true">
+                            <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm Password" required>
+                        </mat-form-field>
+                    </form>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-button color="primary" (click)="registerClicked()">Register</button>
+                </mat-card-actions>
+            </mat-card>
+
+            <a class="existing-account" (click)="existing()">Already have an account?</a>
+        </div>
+    </div>
+
+    <footer class="register-footer">
+        <p class="text-center">
+            <!-- TODO (jace) change to Github link -->
+            <a href="http://self-assembly.net/wiki/index.php?title=Main_Page" class="register-hyperlink">WebDNA</a>, University of Arkansas
+        </p>
+    </footer>
+
+</div>
+
+<!-- <div class="wrapper wrapper-full-page">
+    <div class="full-page register-page">
+
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="header-text">
+                            <h2>Welcome to WebDNA</h2>
+                            <h4>An oxDNA Simulation + Analysis Framework</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-2">
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="icon">
+                                    <i class="pe-7s-play"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <h4>Run DNA Simulations</h4>
+                                Take advantage of the rich feature set of oxDNA with an accessable user interface and minimal programming requirements.
+                            </div>
+                        </div>
+
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="icon">
+                                    <i class="pe-7s-refresh-2"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <h4>Analysis Pipeline</h4>
+                                Analyze your simulation results with a series of built-in Python scripts, or write your own!
+
+                            </div>
+                        </div>
+
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="icon">
+                                    <i class="pe-7s-share"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <h4>Visualization</h4>
+                                Observe your results with an easy to use browser-based simulation visualizer.
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-md-offset-s1">
+                        <form (ngSubmit)="register()">
+                            <div class="card card-plain">
+                                <div class="content">
+                                    <div class="form-group">
+                                        <input [(ngModel)]="user.first_name" #firstNameInput="ngModel" name="firstname" type="email" placeholder="Your First Name"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input [(ngModel)]="user.last_name" #lastNameInput="ngModel" name="lastname" type="email" placeholder="Your Last Name" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input [(ngModel)]="user.username" #usernameInput="ngModel" name="username" type="email" placeholder="Username" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input [(ngModel)]="user.email" #emailInput="ngModel" name="email" type="email" placeholder="Enter email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input [(ngModel)]="user.password" #passwordInput="ngModel" name="password" type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input [(ngModel)]="password_confirmation" #passwordConfirmInput="ngModel" name="password_confirm" type="password" placeholder="Confirm Password"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-fill btn-neutral btn-wd">Create A New Account</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <div class="header">
+                            <hr/>
+                        </div>
+                        <br/>
+
+                        <div class="card card-plain text-center">
+                            <button (click)="existing()" type="submit" class="btn btn-fill btn-neutral btn-wd">Log in with Existing Account</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer footer-transparent">
+            <div class="container">
+                <p class="copyright text-center">
+                    &copy; {{test | date: 'yyyy'}}
+                    <a href="http://self-assembly.net/wiki/index.php?title=Main_Page">WebDNA</a>, University of Arkansas
+                </p>
+            </div>
+        </footer>
+
+        <div class="full-page-background"></div>
+        <div class="full-page-background-tint"></div>
+    </div>
+</div> -->

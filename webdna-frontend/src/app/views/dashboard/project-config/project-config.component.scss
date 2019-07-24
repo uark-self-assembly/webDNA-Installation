@@ -1,0 +1,81 @@
+.project-config-page {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.back-button {
+    position: absolute;
+    margin-left: -64px;
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+}
+
+.back-button-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.analysis-button {
+    position: absolute;
+    margin-left: 808px;
+    font-size: 18px;
+    height: 36px;
+}
+
+.analysis-button-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.config-row {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+.button-row {
+    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.config-text-title {
+    font-size: 36px;
+}
+
+.config-text-subtitle {
+    font-size: 18px;
+    color: #9a9a9a;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-file-button {
+    width: 100px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-width * {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}

@@ -1,0 +1,232 @@
+<!-- 
+This file is part of HTMoL:
+Copyright (C) 2014 Dr. Mauricio Carrillo-Tripp  
+http://tripplab.com
+
+Developers:
+v1.0 Leonardo Alvarez-Rivera, Francisco Javier Becerra-Toledo, Adan Vega-Ramirez 
+v2.0 Javier Garcia-Vieyra
+v3.0 Omar Israel Lara-Ramirez, Eduardo González-Zavala, Emmanuel Quijas-Valades, Julio Cesar González-Vázquez
+v3.5 Leonardo Alvarez-Rivera
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>HTMoL v3.5</title>    
+
+<!-- Path to config.js it contains all the user defined variables, no need to change anything else -->    
+    <script>
+        var PROJECT_ID = '%%PROJECTID%%';
+    </script>
+    <script src='static/local/config.js'></script>    
+    
+<!-- ---------------------------------------------------------------------------------- -->    
+    
+    
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/Process.js"></script>
+    <script src="static/js/Support.js"></script>
+    <script src="static/js/Main.js"> </script>
+    <script src='static/js/Menu.js'></script>
+    <script src='static/js/camera.js'></script>
+    <script src='static/js/InicializarRepre.js'></script>
+    <script src='static/js/digitos.js'></script>
+    <script src='static/js/index.js'></script>
+    <script src='static/js/Shaders.js'></script>
+    <script src='static/js/plantilla_esfera.js'></script>
+    <script src='static/js/Buffers.js'></script>
+    <script src='static/js/Picking.js'></script>
+    <script src="static/js/glMatrix.js"></script>
+    <script src="static/js/utils.js"></script>
+    <script src="static/js/ButtonsFunctions.js"></script>
+    <script src='static/js/SplineCatmullRom.js'></script>
+
+    <link rel='stylesheet' href='static/styles/sizeHTMol.css' media='screen'>
+
+    <script id="shader-fs" type="x-shader/x-fragment">
+    #ifdef GL_ES
+    precision lowp float; //en este caso no se requiere mucha presición
+    #endif
+
+    varying vec3 vTransformedNormal;
+    varying vec4 vPosition;
+
+    uniform vec3 uAmbientColor;
+
+    uniform bool uOffscreen;
+
+    uniform vec3 uPointLightingLocation;
+    uniform vec3 uPointLightingColor;
+
+    varying vec4 vColor;
+
+    void main(void) {
+
+        if (uOffscreen)
+        {
+            gl_FragColor = vColor;
+        }
+        else
+        {
+            if (vColor.a==0.0)
+            {
+                gl_FragColor = vec4(1,1,1,0);
+            }
+            else
+            {
+                vec3 lightWeighting;
+                vec3 lightDirection = normalize(uPointLightingLocation - vPosition.xyz);
+
+                float directionalLightWeighting = max(dot(normalize(vTransformedNormal), lightDirection), 0.0);
+                lightWeighting = uAmbientColor + uPointLightingColor * directionalLightWeighting;
+                //gl_FragColor = vColor;
+                gl_FragColor = vec4(vColor.rgb * lightWeighting, vColor.a);
+
+            }
+
+        }
+    }
+</script>
+
+<script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec3 aVertexNormal;
+    attribute vec4 aVertexColor;
+    attribute vec4 aVertexColorDif;
+    attribute vec2 aVertexOption;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+    uniform mat3 uNMatrix;
+
+    uniform bool uOffscreen;
+
+    uniform float uIntArray[12];
+    bool vPaint=true;
+
+    varying vec4 vColor;
+    varying vec3 vTransformedNormal;
+    varying vec4 vPosition;
+
+    void main(void)
+    {
+
+            if (uOffscreen)
+            {
+                vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
+                gl_Position = uPMatrix * vPosition;
+                vColor = aVertexColorDif;
+            }
+            else
+            {
+                if (aVertexColor.a==0.0)
+                {
+                    return;
+                }
+                else
+                {
+                    vPaint=true;
+
+                    for(int i=0;i<12;i++) //si es un número mayor a 12 de cadenas hay que modificar esto, por eso esta parte se va a hacer por script
+                    {
+                        if (uIntArray[i] == 0.0  )
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if(aVertexOption[1] == uIntArray[i] )
+                            {
+                                vPaint=false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (vPaint)
+                    {
+                        vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
+                        gl_Position = uPMatrix * vPosition;
+                        vColor = aVertexColor;
+                        vTransformedNormal = uNMatrix * aVertexNormal;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+            }
+
+    }
+</script>
+
+<script src="static/js/MainHTMoL.js"></script>
+
+
+<!-- =======================================  -->
+<!-- =======================================  -->
+
+</head>
+<body onload="webGLStart();">
+
+    <!-- -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="MDTitle">Title</h2>
+            </div>
+            <div class="modal-body" style="align-content: center;">
+                <div id="MDdescription">Description</div>
+                <!--
+                <div id="downloadPDB"style="text-align: center"></div>
+                <div id="downloadXTC"style="text-align: center"></div>
+-->
+            </div>
+
+        </div>
+    </div>
+    <!-- -->
+
+    <div id="Console" class="Console" style=" opacity: 0; background-color:yellow;width:0;height:0;left:50px;top:300px;position:relative;">
+        <div id="console_title "></div>
+        <div id="label1"></div>
+        <div id="console_inputdiv">&nbsp;&nbsp;&nbsp;Input HTMoL commands
+            <textarea id="Console_input" onkeypress="main.onTestChange(event);"></textarea>
+        </div>
+        <div id="outputdiv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTMoL output
+            <textarea id="Console_output"></textarea>
+        </div>
+    </div>
+    <div id="Contenedor">
+
+        <div id="WebGL-Out" style="height:0px;">
+            <!-- do not change value -->
+
+        </div>
+        <div id='info'>
+            <!-- show number of atoms and frames -->
+        </div>
+        <div id='data'>
+            <!-- show progress bar -->
+        </div>
+        <canvas id="canvas">
+            <!-- do not change value -->
+
+            <!-- =======================================  -->
+            <!-- =======================================  -->
+
+    </div>
+
+</body>
+<script type="text/javascript">
+    var main = new Main();
+    var container = document.getElementById("Contenedor");
+    main.MakeMenu(container);
+    document.getElementById("Console_output").readOnly = true; // Julio/para solo lectura para datos de salida de la consola
+</script>
+
+</html>
