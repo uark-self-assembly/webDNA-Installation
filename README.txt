@@ -35,11 +35,7 @@ Install and Setup Frontend
     Environment setup
 	cd webdna-frontend
 	source Install_2.sh
-	source Finish_npm.sh
-    (If Finish_npm.sh fails with errors, run the following)
-	npm install
-	source Finish_npm.sh
-
+	
 Reroute the server
 	source nginx.sh
 
