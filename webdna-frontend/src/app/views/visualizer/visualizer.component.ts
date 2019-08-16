@@ -46,17 +46,17 @@ export class VisualizerComponent implements OnInit {
         this.forcing = true;
         this.projectService.generateVisualization(projectId).then(_ => {
           this.forcing = false;
-          this.showHTMOL();
+          this.show();
         }, _ => {
-          this.showHTMOL();
+          this.show();
         });
       } else {
-        this.showHTMOL();
+        this.show();
       }
     });
   }
 
-  showHTMOL() {
+  show() {
     this.loading = false;
   }
 }
