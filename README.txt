@@ -24,6 +24,7 @@ Install and Setup Backend
     Install Django and perform migrations
 	cd webdna-django-server
 	pip3 install -r requirements.txt
+	python3 manage.py makemigrations webdna
 	python3 manage.py migrate
 
     Setup Rabbit
