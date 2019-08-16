@@ -1,0 +1,87 @@
+overview of oxDNA files used during nBLOCK visualization with UCSF chimera:
+--------------------------------------------------------------------------
+
+.dat & .conf 
+------------
+    Files ending in either .dat & .conf are (usually) equivalent as far 
+    as oxDNA is concerned. The first three lines of the file contain
+    data on the simulation space itself: 
+        1. time step
+        2. length of the box sides (Lx, Ly, Lz) 
+        3. total, potential, and kinetic energies (Etot, U, K) 
+    
+    Starting from the fourth line each row contains five vectors 
+    corresponding to a single nucleotide or nanoparticle within the 
+    simulation space: 
+        v1. center of mass
+        v2. orientation: backbone
+        v3. orientation: normal
+        v4. velocity
+        v5. angular velocity
+
+    Currently while simulating nBLOCK interactions the .dat / .conf
+    files output by oxDNA maintain the same format as standard 
+    simulations. If you'd like more detailed information consult
+    the official documentation on the oxDNA wiki.
+
+.top
+----
+    The .dat file doesn't contain the necessary information regarding 
+    the nanoparticle to strand, strand to nucleotide ownership hierarchy.
+    This missing information can be found within a topology file (.top). Also 
+    within the .top file is the nucleic acid type of each nucleotide.
+    The first line of the file contains two integer values: the total number
+    of particles (number of nucleotides + number of nanoparticles) and 
+    the total number of strands.
+
+    Then each row contains the following information for each nucleotide:
+        1. nanoparticle id
+        2. strand id
+        3. nucleic acid type
+        4. -3 end
+        5. -5 end
+
+SUMMARY
+---------------------------------------------------------------
+x.dat.pdb, x.dat.com      = pyVisScript( x.dat, x.top )
+your nBLOCK visualization = UCSFchimera( x.dat.pdb, x.dat.com )
+---------------------------------------------------------------
+    So we take the native oxDNA files (.dat, .top) and transform them into 
+    two other file types that can be opened up with UCSF Chimera. 
+    The .pdb (protein data base) file type is a worldwide standard with
+    numerous sources of documentation. If you are curious about modifying
+    some of the parameters of the .pdb file that is produced by our nBLOCK 
+    visualization scripts (e.g. to change the standard AU nanoparticle 
+    type to another of your choosing) consult the .txt file 'pdb-format-reference'.
+    within the docs directory. This file will give you a jumping off 
+    point with the .pdb file format. 
+
+    **The resulting .pdb file doesn't represent DNA at the atomistic
+    level, but rather at the same level of abstraction/granularity that oxDNA
+    operates at in general.** 
+
+    '.com' is short for 'commands'. This file format is native to Chimera and
+    parameterizes particle/molecule visualization options (color, texture, size,
+    particle to particle bonds, etc). The developers of Chimera maintain 
+    thorough documentation available from their main website.
+
+
+Quick note to developers 
+------------------------
+    In the standard .conf and .top file formats you can assume that after 
+    accounting for the differences in the number of lines reserved for 
+    the header (three for .conf, one for .top) that the ith row of one file 
+    is paired with ith row of the other file and that together they 
+    give all of the pertinent information for the ith nucleotide. 
+
+    When simulating nBLOCKs the standard indexing scheme isn't maintained. 
+    While there is a row in the .conf file for each nanoparticle, there 
+    isn't a paired row in the topology file. 
+    
+Acknowledgements
+----------------
+    The nBLOCK visualization scripts were adapted from the
+    standard oxDNA scripts that serve the same purpose. 
+
+
+    

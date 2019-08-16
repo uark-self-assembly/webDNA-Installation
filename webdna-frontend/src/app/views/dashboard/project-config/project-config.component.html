@@ -1,0 +1,81 @@
+<div class="project-config-page">
+    <button mat-icon-button class="back-button" color="accent" (click)="backClicked()">
+        <mat-icon class="back-button-icon">arrow_back</mat-icon>
+    </button>
+
+    <button mat-button class="analysis-button" color="accent" (click)="analysisClicked()">
+        Analysis
+        <mat-icon class="analysis-button-icon">arrow_forward_ios</mat-icon>
+    </button>
+
+    <div class="row config-row">
+        <div class="text-muted config-text-title">
+            Simulation Configuration
+            <span style="font-size: 18px;">"{{project.name}}"</span>
+        </div>
+    </div>
+
+    <div class="content content-full-width">
+        <div class="row button-row">
+            <button mat-icon-button color="primary" matTooltip="Save" [disabled]="loading" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" class="pull-right" [disabled]="loading" (click)="save(true)">
+                <mat-icon>play_arrow</mat-icon>
+                Save and Run
+            </button>
+        </div>
+
+        <mat-accordion multi="true">
+            <mat-expansion-panel *ngFor="let optionCollection of optionCollections">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{optionCollection.name}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="form-container">
+                    <div *ngFor="let option of optionCollection.options">
+                        <div [ngSwitch]="option.optionType">
+                            <div *ngSwitchCase="SimulationOptionType.BOOLEAN" class="full-width" style="margin-bottom: 10px;">
+                                <mat-slide-toggle [(ngModel)]="option.value">{{option.displayText}}</mat-slide-toggle>
+                            </div>
+
+                            <mat-form-field *ngSwitchCase="SimulationOptionType.INTEGER" class="full-width">
+                                <input matInput type="number" placeholder="{{option.displayText}}" (keypress)="isNumberKey($event)" [(ngModel)]="option.value">
+                            </mat-form-field>
+
+                            <mat-form-field *ngSwitchCase="SimulationOptionType.FLOAT" class="full-width">
+                                <input matInput type="number" placeholder="{{option.displayText}}" [(ngModel)]="option.value">
+                            </mat-form-field>
+
+                            <mat-form-field *ngSwitchCase="SimulationOptionType.STRING" class="full-width">
+                                <input matInput type="text" placeholder="{{option.displayText}}" [(ngModel)]="option.value">
+                            </mat-form-field>
+
+                            <mat-form-field *ngSwitchCase="SimulationOptionType.CHOICE" class="full-width">
+                                <mat-select placeholder="{{option.displayText}}" [(value)]="option.value">
+                                    <mat-option *ngFor="let choice of option.choices" value="{{choice[0]}}">
+                                        {{choice[1]}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field *ngSwitchCase="SimulationOptionType.DYNAMIC" class="full-width">
+                                    <mat-select placeholder="{{option.displayText}}" [(value)]="option.value">
+                                        <mat-option *ngFor="let choice of option.choices" value="{{choice[0]}}">
+                                            {{choice[1]}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            <div *ngSwitchCase="SimulationOptionType.FILE">
+                                <simulation-file-upload [option]="option" [project]="project"></simulation-file-upload>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

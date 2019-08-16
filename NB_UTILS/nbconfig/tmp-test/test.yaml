@@ -1,0 +1,49 @@
+name     : UniqueTileName
+label    : SomeLabel
+count    : 10
+diameter : 3.2238
+glues    :
+    north  : 
+        label    : 'a'
+        strength : 1
+        sequence : AAGGCCGGTT
+        seqlen   : 7
+    south  : 
+        label    : 'a'
+        strength : 1
+    east   : 
+        label    : 'a'
+        strength : 1
+    west   : 
+        label    : 'a'
+        strength : 1
+    top    : 
+        label    : 'a'
+        strength : 1
+    bottom :
+        label    : 'a'
+        strength : 1
+---
+name     : UniqueTileName2
+label    : SomeLabel2
+count    : 10
+glues    :
+    north  : 
+        label    : 'a'
+        strength : 1
+    south  : 
+        label    : 'a'
+        strength : 1
+    east   : 
+        label    : 'a'
+        strength : 1
+    west   : 
+        label    : 'a'
+        strength : 1
+    top    : 
+        label    : 'a'
+        strength : 1
+    bottom :
+        label    : 'a'
+        strength : 1
+

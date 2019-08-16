@@ -1,0 +1,1 @@
+{"py/object": "webdna.util.project.ProjectSettings", "execution_time": null, "generation": {"py/object": "webdna.util.project.Generation", "arguments": ["generate-sa.py", "30", "sequence.txt"], "files": ["sequence.txt"], "method": "generate-sa"}, "name": "Test", "script_chain": null}

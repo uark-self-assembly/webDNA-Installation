@@ -1,0 +1,52 @@
+@import '~@angular/material/theming';
+@import 'src/webdna-app-theme.scss';
+
+.sidenav-background-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50%;
+    background-image: url(../../../../assets/img/dna-sidebar-background.png);
+}
+
+.content-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.content-container {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.content-sidenav {
+    width: 200px;
+}
+
+.toolbar-fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.sidenav-content-container {
+    padding: 0px;
+}
+
+img.sidenav-logo {
+    margin: 20px
+}
+
+.sidenav-divider {
+    background: white;
+    border-top-width: 1.5px;
+    border-top-color: rgba(255, 255, 255, 1);
+    width: 90%;
+    margin: auto;
+}

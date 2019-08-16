@@ -1,0 +1,10 @@
+/home/austin/WebDNA/oxDNA/build/CMakeFiles/edit_cache.dir
+/home/austin/WebDNA/oxDNA/build/CMakeFiles/test.dir
+/home/austin/WebDNA/oxDNA/build/CMakeFiles/rebuild_cache.dir
+/home/austin/WebDNA/oxDNA/build/CMakeFiles/test_scientific.dir
+/home/austin/WebDNA/oxDNA/build/src/CMakeFiles/rebuild_cache.dir
+/home/austin/WebDNA/oxDNA/build/src/CMakeFiles/oxDNA.dir
+/home/austin/WebDNA/oxDNA/build/src/CMakeFiles/edit_cache.dir
+/home/austin/WebDNA/oxDNA/build/src/CMakeFiles/common.dir
+/home/austin/WebDNA/oxDNA/build/src/CMakeFiles/DNAnalysis.dir
+/home/austin/WebDNA/oxDNA/build/src/CMakeFiles/confGenerator.dir

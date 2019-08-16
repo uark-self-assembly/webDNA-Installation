@@ -1,0 +1,14 @@
+ <div class="project-list-page">
+    <div class="row project-list-header">
+        <span class="text-muted project-list-header-title">
+            <span *ngIf="user && user.first_name">{{user.first_name}}'s Projects</span>
+            <span *ngIf="!user || !user.first_name">Projects</span>
+        </span>
+
+
+        <button mat-raised-button color="primary" type="button" class="pull-right" (click)="addProjectClicked()">
+            <mat-icon>add</mat-icon>New</button>
+    </div>
+    <project-table [projects]="projects" [projectClicked]="projectClicked" [deleteClicked]="deleteClicked"
+        [duplicateClicked]="duplicateClicked"></project-table>
+</div>

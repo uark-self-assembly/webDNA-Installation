@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/austin/WebDNA/oxDNA/src/Utilities/time_scales/time_scales.c
+time_scales.h
+/home/austin/WebDNA/oxDNA/src/Utilities/time_scales/time_scales.h
+
+/home/austin/WebDNA/oxDNA/src/Utilities/time_scales/time_scales.h
+stdio.h
+-
+stdlib.h
+-
+math.h
+-
+stdio.h
+-
+
+/home/austin/WebDNA/oxDNA/src/Utilities/timing/timing.c
+timing.h
+/home/austin/WebDNA/oxDNA/src/Utilities/timing/timing.h
+
+/home/austin/WebDNA/oxDNA/src/Utilities/timing/timing.h
+time.h
+-
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+

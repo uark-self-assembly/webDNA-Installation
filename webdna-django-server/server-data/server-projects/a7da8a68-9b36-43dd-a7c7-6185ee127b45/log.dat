@@ -1,0 +1,23 @@
+INFO: seeding the RNG with 42
+INFO: Initializing backend 
+INFO: Backend precision: float
+INFO: Simulation type: MD
+INFO: Using '' as the input for sequence-dependent values
+INFO: pid: 3637
+INFO: N_cells_side: 17
+INFO: N: 55
+INFO: Using randomly distributed velocities
+INFO: Initial kinetic energy: 14.570513
+INFO: SVN CODE VERSION: SVN_NOT_FOUND
+INFO: COMPILED ON: 16/07/19
+INFO: END OF THE SIMULATION, everything went OK!
+INFO: Lists updated 96258 times (every ~10.388747 steps)
+INFO: Timings informations:
+
+MD step: 0.085030 ms
+First step: 0.009739 ms
+Hilbert sorting: 0.000000 ms
+Lists update: 0.005801 ms
+Forces + second step: 0.054371 ms
+Thermostat: 0.002564 ms
+

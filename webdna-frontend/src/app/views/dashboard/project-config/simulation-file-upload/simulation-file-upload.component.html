@@ -1,0 +1,15 @@
+<div class="container-fluid" style="margin-bottom: 15px;">
+    <div class="row">
+        <button *ngIf="option.value" mat-icon-button (click)="clearFileClicked()">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="fileButtonClicked()">
+            {{option.value ? option.displayText + ': ' + option.value.name : 'Upload ' + option.displayText}}
+        </button>
+        <button *ngIf="existingFile" mat-icon-button style="margin-left: 15px;" color="accent" matTooltip="See the file you previously uploaded" (click)="viewExistingClicked()">
+            <mat-icon>open_in_new</mat-icon>
+        </button>
+        <span *ngIf="!existingFile" style="margin-left: 15px; font-style: italic; color: #333333;">No file uploaded</span>
+    </div>
+    <input id="{{option.propertyName}}" type="file" style="display: none;" (change)="fileChange($event)">
+</div>

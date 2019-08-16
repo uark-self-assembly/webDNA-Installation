@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Create a Project
+    <span class="pull-right">
+        <button mat-icon-button tabindex="-1" (click)="onCloseClicked()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+</h2>
+<mat-dialog-content>
+    <p>Enter a Project Name:</p>
+    <mat-form-field class="input-field-full-width">
+        <input matInput [(ngModel)]="data.name" (keypress)="detectEnter($event)">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="primary" [mat-dialog-close]="data.name">Create</button>
+</mat-dialog-actions>

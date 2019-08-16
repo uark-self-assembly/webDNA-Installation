@@ -1,0 +1,32 @@
+Chimera Commands Quick Reference
+--------------------------------
+
+To bring up the Chimera command line:
+    Tools -> General Controls -> Command Line
+
+Visualization
+-------------
+    1. To change the radius of all nanoparticles replace the 
+    variable 'r' at the end of the following statement with 
+    a constant:
+        `setattr a radius r`
+
+       To adjust all of the nanoparticles transparency level:
+        `transparency <some value, e.g. 80>`
+
+    2. To make the DNA strands more thin:
+        `setattr m stickScale <some value, e.g. .5>`
+
+    2. To adjust Chimera for quick movie rendering:
+        TLF TODO: copy info from email i sent jacob
+
+    3. Outline models with black lines
+        `set silhouette`
+
+Scripting Commands
+------------------
+    1. To execute Chimera commands from a python script:
+        `from chimera import runCommand as rc
+         ...
+         rc( < chimera command as string > )`
+

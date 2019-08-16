@@ -1,0 +1,1 @@
+/usr/bin/g++  -O3 -DNDEBUG  -rdynamic CMakeFiles/DNAnalysis.dir/DNAnalysis.cpp.o CMakeFiles/DNAnalysis.dir/Managers/AnalysisManager.cpp.o CMakeFiles/DNAnalysis.dir/Backends/AnalysisBackend.cpp.o  -o ../bin/DNAnalysis libcommon.a -ldl 
