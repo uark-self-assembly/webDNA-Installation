@@ -397,16 +397,16 @@ class ProjectSettingsSerializer(serializers.Serializer):
     interaction_type = serializers.CharField(max_length=10, default='DNA')
     sim_type = serializers.CharField(max_length=10, default='MD')
     backend = serializers.CharField(max_length=10, default='CPU')
-    backend_precision = serializers.CharField(max_length=10)
+    backend_precision = serializers.CharField(max_length=10, default='double')
     debug = serializers.IntegerField(default=0, read_only=True, min_value=0, max_value=1)
 
     # Simulation Options
     steps = serializers.IntegerField()
     restart_step_counter = serializers.IntegerField(default=0, min_value=0, max_value=1)
     seed = serializers.IntegerField(default=randint)
-    T = serializers.CharField(max_length=20)
+    T = serializers.CharField(max_length=20, default='273k')
     fix_diffusion = serializers.IntegerField(default=1, min_value=0, max_value=1)
-    verlet_skin = serializers.FloatField()
+    verlet_skin = serializers.FloatField(default=0.05)
     back_in_box = serializers.IntegerField(default=0, min_value=0, max_value=1)
     salt_concentration = serializers.FloatField(required=False)  # only used with DNA2
     use_average_seq = serializers.IntegerField(default=1, min_value=0, max_value=1)  # If sequence dependence is to be used, set this to 0 and specify seq_dep_file.
@@ -415,11 +415,11 @@ class ProjectSettingsSerializer(serializers.Serializer):
     external_forces_file = serializers.CharField(max_length=128, required=False)
 
     # Molecular Dynamics Simulations Options
-    dt = serializers.FloatField(required=True)
-    thermostat = serializers.CharField(max_length=10)
-    newtonian_steps = serializers.IntegerField()  # required if thermostat != "no"
+    dt = serializers.FloatField(required=True, default=0.005)
+    thermostat = serializers.CharField(max_length=10, default='john')
+    newtonian_steps = serializers.IntegerField(default=103)  # required if thermostat != "no"
     pt = serializers.FloatField(required=False)  # only used if thermostat == "john"
-    diff_coeff = serializers.FloatField(required=True)  # required if pt is not specified
+    diff_coeff = serializers.FloatField(required=True, default=2.5)  # required if pt is not specified
 
     # NOT USING MONTE CARLO SIMULATION SETTINGS
 
