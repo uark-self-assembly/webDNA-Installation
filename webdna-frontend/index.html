@@ -1,0 +1,66 @@
+<html>
+
+<head>
+	<title>oxDNA three.js viewer</title>
+	<style> /*CSS*/
+		.sidenav { /*side bar settings*/
+			height: 100%;
+			width: 10%;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			right: 1;
+			text-align: left;
+			overflow-x: scroll;
+		}
+
+		textarea {
+			height: 20%;
+			margin: 5px 5px 5px 5px;
+			overflow-y: scroll;
+			font-size: 12px;
+
+		}
+
+		button {
+			margin: 5px 5px 5px 5px;
+			padding: 5px;
+			width: 100px;
+			background-color: azure;
+			border: 1px solid;
+		}
+
+		button:active {
+			background-color: darkcyan;
+			box-shadow: 0 5px currentColor;
+			transform: translateY(4px); /*amt of movement when active*/
+		}
+
+		body {
+			margin: 0;
+		}
+
+		canvas {
+			width: 90%;
+			height: 100%
+		}
+	</style>
+	<input type="file" id="externalLoader" multiple style="display:none" onchange="handleFiles(this.files)">
+
+	<body>
+		<div class="sidenav"> <!--sidebar-->
+			<button onclick="uploadFile()" type="button">Upload Local Files</button>
+			<textarea id="BaseList" cols="20" rows="3" name="textarea" readonly> Selected Bases List </textarea>
+		</div>
+		<div class="main"> <!--all files to be loaded onload of html file-->
+			<script src="static/ts/lib/three.js"></script>
+			<script src="static/ts/controls/TrackballControls.js"></script>
+			<script src="static/dist/scene_setup.js"></script>
+			<script src="static/dist/mesh_setup.js"></script>
+			<script src="static/dist/file_reading.js"></script>
+			<script src="static/dist/main.js"></script>
+			<script src="static/dist/base_selector.js"></script>
+		</div>
+	</body>
+
+</html>

@@ -20,6 +20,11 @@ folder/
   |
 ```
 
+### Download oxDNA-Viewer
+This project uses a lightly modified version of oxDNA-Viewer to visualizer simulations. First download the source code from github with the following command,
+	git clone https://github.com/sulc-group/oxdna-viewer.git
+then place the code in a folder titled 'oxvis' and replace the downloaded index.html file with the file of the same name in the webdna-frontend folder. oxDNA-Viewer is now set up and you can move on.
+
 ### Environment setup
 
 After that, you'll want to create a new ".env" file. This file will contain the environment variables the frontend needs to work properly.
