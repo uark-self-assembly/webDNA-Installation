@@ -12,7 +12,7 @@ import { DashboardComponent } from './dashboard.component';
 import { VisualizerComponent } from '../visualizer/visualizer.component';
 import { ProjectConfigComponent } from './project-config/project-config.component';
 import { ProjectAnalysisComponent } from './project-analysis/project-analysis.component';
-import { HtmolComponent } from '../visualizer/htmol/htmol.component';
+import { VisComponent } from '../visualizer/oxvis/oxvis.component';
 import { AppMaterialModule } from '../../material/app-material.module';
 import { LogOutputDialogComponent } from './log-output/dialog/log-output-dialog.component';
 import { ProjectAddDialogComponent } from './project-list/project-add-dialog/project-add-dialog.component';
@@ -32,7 +32,7 @@ import { ScriptUploadDialogComponent } from './project-analysis/script-upload-di
     declarations: [
         DashboardComponent,
         VisualizerComponent,
-        HtmolComponent,
+        VisComponent,
         LogOutputDialogComponent,
         SimulationFileUploadComponent,
         ProjectAddDialogComponent,

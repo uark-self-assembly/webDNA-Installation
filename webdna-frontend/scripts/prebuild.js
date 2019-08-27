@@ -13,10 +13,6 @@ const templatesAndTargets = [
     {
         template: '../src/environments/environment.prod.ts.template',
         target: '../src/environments/environment.prod.ts'
-    },
-    {
-        template: '../htmol/local/config.js.template',
-        target: '../htmol/local/config.js'
     }
 ];
 

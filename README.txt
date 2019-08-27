@@ -7,7 +7,7 @@ Install and Setup oxDNA
     Install dependencies
         sudo apt update
 	sudo apt upgrade
-	sudo apt-get install cmake
+	sudo apt install cmake
         cd WebDNA
 	source oxBuild.sh
         

@@ -22,7 +22,7 @@ export class VisComponent implements AfterViewInit {
   }
 
   getMainOxvisPage() {
-    this.http.get(this.requestService.host + '/static/index.html').map(res => res.text())
+    this.http.get(this.requestService.host + '/assets/oxvis/index.html').map(res => res.text())
       .subscribe(response => {
         this.oxvisFrame.nativeElement.srcdoc = response.replace('%%PROJECTID%%', this.projectId);
       });
