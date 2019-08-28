@@ -7,7 +7,7 @@ var fs = require('fs');
 var cors = require('cors');
 require('dotenv').config();
 
-eval(fs.readFileSync('htmol/local/config.js') + '');
+//eval(fs.readFileSync('htmol/local/config.js') + '');
 
 var port = process.env.PORT || 8080;
 
