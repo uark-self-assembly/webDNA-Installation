@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Project, ProjectFileType, LogResponse } from './project';
+import { Project, ProjectFileType, LogResponse, ConfResponse } from './project';
 import { RequestService, FileResponse } from '../request/request.service';
 import { StorageService } from '../storage/storage.service';
 import { Response } from '@angular/http';
@@ -54,6 +54,10 @@ export class ProjectService {
 
   getCurrentOutput(projectId: string): Promise<LogResponse> {
     return this.requestService.get(this.projectsUrl.concat(projectId, 'current-output'), true);
+  }
+
+  getConfiguration(projectId: string): Promise<ConfResponse> {
+    return this.requestService.get(this.projectsUrl.concat(projectId, 'configuration'), true);
   }
 
   getSettings(projectId: string): Promise<object> {

@@ -51,6 +51,11 @@ function getFileFromURL() {
     }
 }
 getFileFromURL();
+function handleConfiguration(dat, top) {
+    readTop(top);
+    readDat(dat, current_system);
+    render();
+}
 //get files from upload button
 function uploadFile(fileList) {
     document.getElementById("externalLoader").click();
@@ -87,8 +92,14 @@ function readTop(top_reader) {
     let nuc_local_id = 0;
     let last_strand = 1; //strands are 1-indexed in oxDNA .top files
     let neighbor3;
+    var file = "";
     // parse file into lines
-    var file = top_reader.result;
+    if (typeof top_reader === "string") {
+        file = top_reader;
+    }
+    else {
+        file = top_reader.result;
+    }
     var lines = file.split(/[\r\n]+/g);
     lines = lines.slice(1); // discard the header
     //create empty list of nucleotides with length equal to the topology
@@ -162,8 +173,16 @@ let x_bb_last, y_bb_last, z_bb_last;
 function readDat(dat_reader, system) {
     var nuc_local_id = 0;
     var current_strand = systems[sys_count].strands[0];
-    // parse file into lines 
-    let lines = dat_reader.result.split(/[\r\n]+/g);
+    // parse file into lines
+    var file = "";
+    // parse file into lines
+    if (typeof dat_reader === "string") {
+        file = dat_reader;
+    }
+    else {
+        file = dat_reader.result;
+    }
+    let lines = file.split(/[\r\n]+/g);
     //get the simulation box size 
     let box = parseFloat(lines[1].split(" ")[3]);
     // discard the header

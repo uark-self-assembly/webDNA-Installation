@@ -97,3 +97,8 @@ export class LogResponse {
     log: string;
     stdout: string;
 }
+
+export class ConfResponse {
+    dat: string;
+    top: string;
+}

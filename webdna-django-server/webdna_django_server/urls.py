@@ -43,6 +43,7 @@ urlpatterns = [
 
     # /projects/{id}/*
     path('api/projects/<uuid:project_id>/current-output/', projects.OutputView.as_view()),
+    path('api/projects/<uuid:project_id>/configuration/', projects.ConfigurationView.as_view()),
     path('api/projects/<uuid:project_id>/settings/', projects.SettingsView.as_view()),
     path('api/projects/<uuid:project_id>/generate-visualization/', projects.GenerateVisualizationView.as_view()),
     path('api/projects/<uuid:project_id>/duplicate/', projects.DuplicateProjectView.as_view()),

@@ -305,6 +305,32 @@ class OutputView(BaseProjectView):
         else:
             return ErrorResponse.make(errors=serialized_body.errors)
 
+# URL: api/projects/<uuid:project_id>/configuration/
+class ConfigurationView(BaseProjectView):
+
+    def get(self, request, *args, **kwargs):
+        self.check_object_permissions(request, self.get_object())
+        serialized_body = CheckStatusSerializer(data=kwargs)
+        if serialized_body.is_valid():
+            project_id = serialized_body.validated_data['project_id']
+            running = serialized_body.fetched_job.finish_time is None
+
+            dat_file = server.get_project_file(project_id, ProjectFile.TRAJECTORY_DAT)
+            if os.path.isfile(dat_file):
+                dat_string = file_util.get_file_contents_as_string(dat_file)
+            else:
+                dat_string = ''
+
+            top_file = server.get_project_file(project_id, ProjectFile.GENERATED_TOP)
+            if os.path.isfile(top_file):
+                top_string = file_util.get_file_contents_as_string(top_file)
+            else:
+                top_string = ''
+
+            response_data = {'top': top_string, 'dat': dat_string}
+            return ObjectResponse.make(response_data)
+        else:
+            return ErrorResponse.make(errors=serialized_body.errors)
 
 # URL: api/projects/<uuid:project_id>/files/<str:file_type>/download/
 class DownloadProjectFileView(BaseProjectView):

@@ -44,6 +44,7 @@ function getFileFromURL() {
     let url = new URL(window.location.href);
     let top_file = url.searchParams.get("topology") || '';
     let dat_file = url.searchParams.get("configuration") || '';
+
     if (top_file != '' && dat_file != '') {
         let top_xhr = new XMLHttpRequest();
         let dat_xhr = new XMLHttpRequest();
@@ -64,6 +65,12 @@ function getFileFromURL() {
     }
 }
 getFileFromURL();
+
+function handleConfiguration(dat, top) {
+    readTop(top);
+    readDat(dat, current_system);
+    render();
+}
 
 //get files from upload button
 function uploadFile(fileList) {
@@ -105,8 +112,13 @@ function readTop(top_reader) {
     let last_strand: number = 1; //strands are 1-indexed in oxDNA .top files
     let neighbor3;
 
+    var file = "";
     // parse file into lines
-    var file = top_reader.result as string
+    if (typeof top_reader === "string") {
+        file = top_reader
+    } else {
+        file = top_reader.result as string
+    }
     var lines = file.split(/[\r\n]+/g);
     lines = lines.slice(1); // discard the header
 
@@ -187,11 +199,19 @@ function readTop(top_reader) {
 let x_bb_last,
     y_bb_last,
     z_bb_last;
+
 function readDat(dat_reader, system) {
     var nuc_local_id = 0;
     var current_strand = systems[sys_count].strands[0];
-    // parse file into lines 
-    let lines = dat_reader.result.split(/[\r\n]+/g);
+    // parse file into lines
+    var file = "";
+    // parse file into lines
+    if (typeof dat_reader === "string") {
+        file = dat_reader
+    } else {
+        file = dat_reader.result as string
+    }
+    let lines = file.split(/[\r\n]+/g);
     //get the simulation box size 
     let box = parseFloat(lines[1].split(" ")[3]);
     // discard the header
@@ -205,7 +225,7 @@ function readDat(dat_reader, system) {
         var current_nucleotide = current_strand.nucleotides[nuc_local_id];
         //get nucleotide information
         // consume a new line 
-        let l: string = lines[i].split(" ");
+        let l = lines[i].split(" ");
         // shift coordinates such that the 1st base of the  
         // 1st strand is @ origin 
         let x = parseFloat(l[0]),// - fx,

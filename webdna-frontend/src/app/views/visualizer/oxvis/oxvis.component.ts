@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { RequestService } from '../../../services/request/request.service';
+import { ProjectService } from '../../../services/project/project.service';
+
 
 @Component({
   selector: 'oxvis-cmp',
@@ -13,7 +15,7 @@ export class VisComponent implements AfterViewInit {
 
   @ViewChild('oxvisFrame') oxvisFrame: ElementRef;
 
-  constructor(private http: Http, private requestService: RequestService) {
+  constructor(private http: Http, private requestService: RequestService, private projectService: ProjectService) {
   }
 
   ngAfterViewInit() {
@@ -22,9 +24,17 @@ export class VisComponent implements AfterViewInit {
   }
 
   getMainOxvisPage() {
-    this.http.get(this.requestService.host + '/assets/oxvis/index.html').map(res => res.text())
+
+    this.projectService.getConfiguration(this.projectId).then(config => {
+      config.dat = config.dat.replace(/\n/g, '\\n');
+      config.top = config.top.replace(/\n/g, '\\n');
+      this.http.get(this.requestService.host + '/assets/oxvis/index.html').map(res => res.text())
       .subscribe(response => {
-        this.oxvisFrame.nativeElement.srcdoc = response.replace('%%PROJECTID%%', this.projectId);
+        var resp = response.replace('%%CONFIG_DAT%%', config.dat).replace('%%CONFIG_TOP%%', config.top);
+	console.log(resp);
+        console.log(config.dat);
+        this.oxvisFrame.nativeElement.srcdoc = resp;
       });
+    });
   }
 }
