@@ -7,7 +7,7 @@ Django==2.0.6
 django-celery-results==1.0.1
 django-cors-headers==2.3.0
 django-rest-framework==0.1.0
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 djangorestframework-jwt==1.11.0
 jsonpickle==0.9.6
 kombu==4.2.1
