@@ -11,7 +11,7 @@ djangorestframework==3.8.2
 djangorestframework-jwt==1.11.0
 jsonpickle==0.9.6
 kombu==4.2.1
-numpy==1.14.5
+numpy==1.22.0
 psycopg2-binary==2.7.5
 pycparser==2.18
 PyJWT==1.6.4
