@@ -4,7 +4,7 @@ billiard==3.5.0.4
 celery==4.2.0
 cffi==1.11.5
 Django==2.0.6
-django-celery-results==1.0.1
+django-celery-results==2.4.0
 django-cors-headers==2.3.0
 django-rest-framework==0.1.0
 djangorestframework==3.8.2
